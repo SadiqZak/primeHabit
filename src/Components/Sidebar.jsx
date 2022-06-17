@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 import {
     Flex,
     Text,
@@ -12,19 +13,18 @@ import {
     FiHome,
     
 } from 'react-icons/fi'
-import { IoPawOutline } from 'react-icons/io5'
 import { NavItem } from "../Components/NavItem";
 
 export const Sidebar = () => {
     const [navSize, changeNavSize] = useState("large")
+    const navigate = useNavigate()
     return (
         <Flex
-            pos="sticky"
+            pos={navSize==="small"? "sticky": "absolute"}
             // left="5"
-            h="90vh"
-            // marginTop="2.5vh"
+            h="89.5vh"
             boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
-            borderBottomRightRadius={navSize == "small" ? "15px" : "30px"}
+            borderBottomRightRadius={navSize === "small" ? "15px" : "30px"}
             w={navSize == "small" ? "75px" : "250px"}
             flexDir="column"
             backgroundColor="sidebar"
@@ -34,8 +34,7 @@ export const Sidebar = () => {
             <Flex
                 p="5%"
                 flexDir="column"
-                w="100%"
-                alignItems={navSize == "small" ? "center" : "flex-start"}
+                alignItems={navSize === "small" ? "center" : "flex-start"}
                 as="nav"
             >
                 <IconButton
@@ -44,13 +43,13 @@ export const Sidebar = () => {
                     _hover={{ background: 'none' }}
                     icon={<FiMenu />}
                     onClick={() => {
-                        if (navSize == "small")
+                        if (navSize === "small")
                             changeNavSize("large")
                         else
                             changeNavSize("small")
                     }}
                 />
-                <NavItem navSize={navSize} icon={FiHome} title="Home" description="This is the description for the dashboard." /> 
+                <NavItem onClick={()=>navigate('/')} navSize={navSize} icon={FiHome} title="Home" /> 
                 {/* <NavItem navSize={navSize} icon={FiLabel} title="Home" description="This is the description for the dashboard." />  */}
             </Flex>
 
@@ -58,14 +57,14 @@ export const Sidebar = () => {
                 p="5%"
                 flexDir="column"
                 w="100%"
-                alignItems={navSize == "small" ? "center" : "flex-start"}
+                alignItems={navSize === "small" ? "center" : "flex-start"}
                 mb={4}
             >
                 <Divider display={navSize == "small" ? "none" : "flex"} />
                 <Flex mt={4} align="center">
                     <Avatar size="sm" />
-                    <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>
-                        <Heading as="h3" size="sm">Sylwia Weller</Heading>
+                    <Flex flexDir="column" ml={4} display={navSize === "small" ? "none" : "flex"}>
+                        <Heading as="h3" size="sm">Adarsh Balika</Heading>
                         <Text color="gray">Admin</Text>
                     </Flex>
                 </Flex>
