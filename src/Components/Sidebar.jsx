@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 import {
     Flex,
     Text,
@@ -48,8 +48,9 @@ export const Sidebar = () => {
                             changeNavSize("small")
                     }}
                 />
-                <NavItem onClick={()=>navigate('/')} navSize={navSize} icon={FiHome} title="Home" /> 
-                {/* <NavItem navSize={navSize} icon={FiLabel} title="Home" description="This is the description for the dashboard." />  */}
+                <Link to="/"><NavItem navSize={navSize} icon={FiHome} title="Home" /></Link>
+                <Link to="/addahabit"><NavItem navSize={navSize} icon={FiHome} title="Habit" /></Link>
+                 
             </Flex>
 
             <Flex

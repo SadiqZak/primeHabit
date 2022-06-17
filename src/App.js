@@ -3,6 +3,7 @@ import { Flex, Heading, VStack } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
 import { Sidebar } from "./Components/Sidebar";
 import { Home } from "./pages/Home/Home";
+import { AddAHabit } from './pages/AddAHabit/AddAHabit';
 
 function App() {
   return (
@@ -22,10 +23,11 @@ function App() {
         <Sidebar/>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/addahabit" element={<AddAHabit />} />
         </Routes>
       </Flex>
     </Flex>
   );
 }
-
+  
 export default App;
