@@ -1,4 +1,4 @@
-import "./App.css";
+import './App.css'
 import { Flex, Heading, VStack } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
 import { Sidebar } from "./Components/Sidebar";
@@ -6,9 +6,9 @@ import { Home } from "./pages/Home/Home";
 
 function App() {
   return (
-    <div className="App">
+    <Flex flexDir="column" height="100vh">
       <VStack
-        pos="fixed"
+        pos="sticky"
         w="100%"
         backgroundColor="navbar"
         color="primaryColor"
@@ -18,13 +18,13 @@ function App() {
           <Heading size="lg">PrimeHabit</Heading>
         </Flex>
       </VStack>
-      <Flex  pos="relative" top="10.5vh">
-        <Sidebar />
+      <Flex pos="relative" h="100%" w="100%" >
+        <Sidebar/>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
       </Flex>
-    </div>
+    </Flex>
   );
 }
 

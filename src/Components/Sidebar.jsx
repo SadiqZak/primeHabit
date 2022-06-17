@@ -20,9 +20,8 @@ export const Sidebar = () => {
     const navigate = useNavigate()
     return (
         <Flex
-            pos={navSize==="small"? "sticky": "absolute"}
-            // left="5"
-            h="89.5vh"
+            pos={navSize==="small"? "sticky":"absolute"}
+            height="100%"
             boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
             borderBottomRightRadius={navSize === "small" ? "15px" : "30px"}
             w={navSize == "small" ? "75px" : "250px"}
