@@ -1,19 +1,27 @@
 import { VStack , Input, Text, Box, Button, Heading} from '@chakra-ui/react'
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
+import {useNavigate, useLocation} from 'react-router-dom'
 import { AuthContext } from '../../context/auth-context'
 
 export const Login = () => {
   const [userInput, setUserInput] = useState({email:"", password:""})
   const {authoriseUser} = useContext(AuthContext)
+  const {authToken} = useContext(AuthContext)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   const submitHandler=(e)=>{
     e.preventDefault()
-    // console.log(userInput)
     if(userInput.email && userInput.password){
       authoriseUser({email:userInput.email, password:userInput.password})
     }
-    
   }
+
+  useEffect(()=>{
+    if(authToken){
+      return location.state?.from?.pathname ? navigate( location.state?.from?.pathname): navigate("/")
+    }
+  },[authToken])
 
   return (
     <VStack margin="5rem auto">

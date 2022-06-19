@@ -4,7 +4,7 @@ import { authoriseUserService } from "../services/auth-services";
 const AuthContext = createContext()
 
 const AuthProvider = ({children})=>{
-    const [authToken, setAuthToken] = useState("")
+    const [authToken, setAuthToken] = useState(null)
     const [authUser, setAuthUser] = useState({})
 
     const authoriseUser = async({email, password})=>{
