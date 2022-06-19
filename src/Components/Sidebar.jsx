@@ -10,9 +10,9 @@ import {
 } from '@chakra-ui/react'
 import {
     FiMenu,
-    FiHome,
-    
+    FiHome,  
 } from 'react-icons/fi'
+import { IoIosCreate } from "react-icons/io";
 import { NavItem } from "../Components/NavItem";
 
 export const Sidebar = () => {
@@ -29,12 +29,14 @@ export const Sidebar = () => {
             backgroundColor="sidebar"
             color="white"
             justifyContent="space-between"
+
         >
             <Flex
                 p="5%"
                 flexDir="column"
                 alignItems={navSize === "small" ? "center" : "flex-start"}
                 as="nav"
+                w="100%"
             >
                 <IconButton
                     background="none"
@@ -49,7 +51,7 @@ export const Sidebar = () => {
                     }}
                 />
                 <Link to="/"><NavItem navSize={navSize} icon={FiHome} title="Home" /></Link>
-                <Link to="/addahabit"><NavItem navSize={navSize} icon={FiHome} title="Habit" /></Link>
+                <Link to="/addahabit"><NavItem navSize={navSize} icon={IoIosCreate} title="Habit" /></Link>
                  
             </Flex>
 

@@ -16,7 +16,7 @@ export const NavItem=({ icon, title, active, navSize }) =>{
             w="100%"
             alignItems={navSize == "small" ? "center" : "flex-start"}
         >
-            <Menu placement="right">
+            <Menu placement="right" w="100%">
                 <Link
                     backgroundColor={active && "primaryColor"}
                     p={3}

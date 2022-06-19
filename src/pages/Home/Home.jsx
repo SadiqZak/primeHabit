@@ -1,8 +1,11 @@
 import React from 'react'
 import {Flex, Heading, Box, Container, Stack, Button} from '@chakra-ui/react'
+import { Sidebar } from '../../Components/Sidebar'
 
 export const Home = () => {
   return (
+    <Flex pos="relative" h="100%" w="100%" >
+    <Sidebar/>
     <Flex flexDir="column" flexGrow="1" w="100%" h="100%" padding="2rem" gap="0.5rem">
       <Flex justifyContent="space-between">
         <Heading as="h2" size="xl">Welcome, AdarshBalika</Heading>
@@ -31,6 +34,7 @@ export const Home = () => {
       </Flex>
       </Stack>
       
+    </Flex>
     </Flex>
   )
 }

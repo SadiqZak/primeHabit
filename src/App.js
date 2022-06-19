@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { Sidebar } from "./Components/Sidebar";
 import { Home } from "./pages/Home/Home";
 import { AddAHabit } from './pages/AddAHabit/AddAHabit';
+import { Login } from './pages/Login/Login';
 
 function App() {
   return (
@@ -20,10 +21,11 @@ function App() {
         </Flex>
       </VStack>
       <Flex pos="relative" h="100%" w="100%" >
-        <Sidebar/>
+      {/* <Sidebar/> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/addahabit" element={<AddAHabit />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Flex>
     </Flex>
