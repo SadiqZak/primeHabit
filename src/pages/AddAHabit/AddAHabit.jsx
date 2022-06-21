@@ -17,7 +17,7 @@ import { AuthContext } from "../../context/auth-context";
 
 export const AddAHabit = () => {
   const [userInput, setUserInput] = useState("");
-  const [clickedMore, setClickedMore] = useState(false)
+  const [clickedMoreId, setClickedMoreId] = useState("")
   const { state, getAllHabits, addUserHabit, deleteHabit } =
     useContext(HabitContext);
   const { authToken } = useContext(AuthContext);
@@ -76,20 +76,24 @@ export const AddAHabit = () => {
               <Text>{ele.habit}</Text>
               <Flex gap="0.1rem" position="relative">
                 <IconButton
-                  onClick={() =>
-                    deleteHabit({ encodedToken: authToken, habitId: ele._id })
-                  }
+                  onClick={()=>setClickedMoreId(ele._id)}
                   icon={<FiMoreVertical />}
                 ></IconButton>
-                {clickedMore &&<Box
+                {clickedMoreId === ele._id &&<Box
                   pos="absolute"
-                  // left="rem"
                   backgroundColor="white"
                   p="0.5rem"
                   border="1px"
                   borderColor="grey"
                 >
-                  <Box>Delete</Box>
+                  <Box
+                  onClick={() =>{
+                    deleteHabit({ encodedToken: authToken, habitId: ele._id })
+                    setClickedMoreId("")
+                  }
+                    
+                  }
+                  >Delete</Box>
                 </Box>}
               </Flex>
             </Flex>
