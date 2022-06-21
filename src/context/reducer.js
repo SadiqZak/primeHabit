@@ -3,13 +3,13 @@ export const reducerFunc = (state, action)=>{
         case "initialState":{
             return{
                 ...state,
-                habits: action.payload.habits
+                habits: [...action.payload.habits]
             }
         }
         case "addUserHabit":{
-            console.log(action.payload)
             return{
-               ...state 
+               ...state,
+               habits: [...action.payload.habits]
             }
         }
         default:{

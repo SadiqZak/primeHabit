@@ -24,7 +24,11 @@ const HabitProvider = ({children})=>{
     const addUserHabit = async({encodedToken, habitData})=>{
         try{
             const response = await addUserHabitService({encodedToken, habitData})
-            console.log(response.data.habits)
+            dispatch({
+                type:"addUserHabit",
+                payload:{habits: response.data.habits}
+            })
+            // console.log(response.data.habits)
         }catch(err){
             console.error(err)
         }

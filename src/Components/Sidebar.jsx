@@ -6,7 +6,7 @@ import {
     IconButton,
     Divider,
     Avatar,
-    Heading, VStack
+    Heading, useMediaQuery
 } from '@chakra-ui/react'
 import {
     FiMenu,
@@ -16,12 +16,14 @@ import { IoIosCreate } from "react-icons/io";
 import { NavItem } from "../Components/NavItem";
 
 export const Sidebar = () => {
-    const [navSize, changeNavSize] = useState("large")
+    const [navSize, changeNavSize] = useState("small")
     const navigate = useNavigate()
+    const [isNotSmallerScreen] = useMediaQuery("(min-width:600px)")
     return (
-        <Flex
+            <Flex
+            top="10vh"
+            height="90vh"
             pos={navSize==="small"? "sticky":"absolute"}
-            height="100%"
             boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
             borderBottomRightRadius={navSize === "small" ? "15px" : "30px"}
             w={navSize == "small" ? "75px" : "250px"}
@@ -29,6 +31,7 @@ export const Sidebar = () => {
             backgroundColor="sidebar"
             color="white"
             justifyContent="space-between"
+            zIndex="99"
 
         >
             <Flex
@@ -44,14 +47,21 @@ export const Sidebar = () => {
                     _hover={{ background: 'none' }}
                     icon={<FiMenu />}
                     onClick={() => {
-                        if (navSize === "small")
-                            changeNavSize("large")
-                        else
+                        if(isNotSmallerScreen){
+                            if (navSize === "small")
+                                changeNavSize("large")
+                            else
+                                changeNavSize("small")
+                        }else{
                             changeNavSize("small")
-                    }}
+                        }
+                
+                }
+                        }
+                      
                 />
-                <Link to="/"><NavItem navSize={navSize} icon={FiHome} title="Home" /></Link>
-                <Link to="/addahabit"><NavItem navSize={navSize} icon={IoIosCreate} title="Habit" /></Link>
+                <Link className='link-tag' to="/"><NavItem navSize={navSize} icon={FiHome} title="Home" /></Link>
+                <Link className='link-tag' to="/addahabit"><NavItem navSize={navSize} icon={IoIosCreate} title="Habit" /></Link>
                  
             </Flex>
 
@@ -72,5 +82,5 @@ export const Sidebar = () => {
                 </Flex>
             </Flex>
         </Flex>
-    )
+            )
 }

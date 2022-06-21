@@ -11,7 +11,9 @@ export const getAllHabitsService = ({encodedToken})=>{
 }
 
 export const addUserHabitService = ({encodedToken, habitData})=>{
-    return axios.post('/api/habits',{habitData}, {
+    return axios.post('/api/habits',{
+        habit:habitData
+    }, {
         headers:{
             authorization: encodedToken
         }

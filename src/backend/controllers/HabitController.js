@@ -64,11 +64,12 @@ export const createHabitHandler = function (schema, request) {
       }
     );
   }
-  const { habit } = JSON.parse(request.requestBody);
+  const { habit } = JSON.parse(request.requestBody); //check again
+
   const createdHabit = {
     _id: uuid(),
     labels: [],
-    ...habit,
+    habit,
   };
   user.habits.push(createdHabit);
   this.db.users.update({ _id: user._id }, user);
