@@ -1,21 +1,31 @@
 import "./App.css";
-import {
-  Flex,
-  Heading,
-  VStack
-} from '@chakra-ui/react'
-import { Sidebar } from "./Components/Sidebar";
+import { Flex} from "@chakra-ui/react";
+import { Routes, Route } from "react-router-dom";
+import { Home } from "./pages/Home/Home";
+import { AddAHabit } from "./pages/AddAHabit/AddAHabit";
+import { Login } from "./pages/Login/Login";
+import { RequireAuth } from "./context/require-auth";
+import { Navbar } from "./Components/Navbar/Navbar";
 
 function App() {
   return (
-    <div className="App">
-      <VStack pos="sticky" backgroundColor="navbar" color="primaryColor" p={5}>
-        <Flex w="100%">
-          <Heading size="lg">PrimeHabit</Heading>
-        </Flex>
-      </VStack>
-     <Sidebar/>
-    </div>
+    <Flex flexDir="column">
+      <Navbar/>
+      <Flex h="100%" w="100%">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/addahabit"
+            element={
+              <RequireAuth>
+                <AddAHabit />
+              </RequireAuth>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Flex>
+    </Flex>
   );
 }
 
