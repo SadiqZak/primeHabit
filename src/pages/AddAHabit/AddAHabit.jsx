@@ -4,9 +4,12 @@ import {
   Heading,
   Input,
   Button,
-  HStack,
+  Text,
+  IconButton,
   Box,
 } from "@chakra-ui/react";
+import { FaTrashAlt } from "react-icons/fa";
+import { FiMoreVertical } from "react-icons/fi";
 import React, { useContext, useEffect, useState } from "react";
 import { Sidebar } from "../../Components/Sidebar";
 import { HabitContext } from "../../context/habit-context";
@@ -14,7 +17,9 @@ import { AuthContext } from "../../context/auth-context";
 
 export const AddAHabit = () => {
   const [userInput, setUserInput] = useState("");
-  const { state, getAllHabits, addUserHabit } = useContext(HabitContext);
+  const [clickedMore, setClickedMore] = useState(false)
+  const { state, getAllHabits, addUserHabit, deleteHabit } =
+    useContext(HabitContext);
   const { authToken } = useContext(AuthContext);
 
   useEffect(() => {
@@ -30,6 +35,7 @@ export const AddAHabit = () => {
       setUserInput("");
     }
   };
+
 
   return (
     <Flex h="100%" w="100%">
@@ -56,16 +62,37 @@ export const AddAHabit = () => {
             <Heading size="md">Please add Habits</Heading>
           )}
           {state.habits?.map((ele) => (
-            <Box
+            <Flex
+              key={ele._id}
               border="1px"
               borderRadius="5px"
               borderColor="grey"
               padding="0.8rem 0.5rem"
               width="100%"
               cursor="pointer"
+              justifyContent="space-between"
+              alignItems="center"
             >
-              {ele.habit}
-            </Box>
+              <Text>{ele.habit}</Text>
+              <Flex gap="0.1rem" position="relative">
+                <IconButton
+                  onClick={() =>
+                    deleteHabit({ encodedToken: authToken, habitId: ele._id })
+                  }
+                  icon={<FiMoreVertical />}
+                ></IconButton>
+                {clickedMore &&<Box
+                  pos="absolute"
+                  // left="rem"
+                  backgroundColor="white"
+                  p="0.5rem"
+                  border="1px"
+                  borderColor="grey"
+                >
+                  <Box>Delete</Box>
+                </Box>}
+              </Flex>
+            </Flex>
           ))}
         </VStack>
       </VStack>

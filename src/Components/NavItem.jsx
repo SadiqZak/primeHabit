@@ -17,7 +17,7 @@ export const NavItem=({ icon, title, active, navSize }) =>{
             alignItems={navSize == "small" ? "center" : "flex-start"}
         >
             <Menu placement="right" w="100%">
-                <Link
+                <Flex
                     backgroundColor={active && "primaryColor"}
                     p={3}
                     borderRadius={8}
@@ -30,7 +30,7 @@ export const NavItem=({ icon, title, active, navSize }) =>{
                             <Text ml={5} display={navSize == "small" ? "none" : "flex"} >{title}</Text>
                         </Flex>
                     </MenuButton>
-                </Link>
+                </Flex>
             </Menu>
         </Flex>
     )

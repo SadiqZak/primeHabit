@@ -27,7 +27,7 @@ export const Navbar = () => {
             !authToken &&  <Link to="/login"><Button backgroundColor="primaryColor" color="navbar">Login</Button></Link>
           }
           {
-             authToken &&  <Button onClick={clickHandler} backgroundColor="primaryColor" color="navbar">Logout</Button>
+             authToken &&  <Button onClick={clickHandler} color="navbar">Logout</Button>
           }
          
          

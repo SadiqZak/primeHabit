@@ -19,3 +19,11 @@ export const addUserHabitService = ({encodedToken, habitData})=>{
         }
     })
 }
+
+export const deleteHabitService = ({encodedToken, habitId})=>{
+    return axios.delete(`/api/habits/${habitId}`,{
+        headers:{
+            authorization: encodedToken
+        }
+    })
+}

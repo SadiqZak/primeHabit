@@ -12,6 +12,12 @@ export const reducerFunc = (state, action)=>{
                habits: [...action.payload.habits]
             }
         }
+        case "deleteUserHabit":{
+            return{
+               ...state,
+               habits: [...action.payload.habits]
+            }
+        }
         default:{
             return state
         }

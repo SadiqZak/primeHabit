@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { addUserHabitService, getAllHabitsService } from "../services/general-services";
+import { addUserHabitService, deleteHabitService, getAllHabitsService } from "../services/general-services";
 import { reducerFunc } from "./reducer";
 
 const HabitContext = createContext()
@@ -34,8 +34,22 @@ const HabitProvider = ({children})=>{
         }
     }
 
+    const deleteHabit = async({encodedToken, habitId})=>{
+        console.log("ID", habitId)
+        try{
+            const response = await deleteHabitService({encodedToken, habitId})
+            console.log(response)
+            dispatch({
+                type:"deleteUserHabit",
+                payload:{habits: response.data.habits}
+            })
+        }catch(err){
+            console.error(err)
+        }
+    }
+
     return(
-        <HabitContext.Provider value={{state, dispatch, getAllHabits, addUserHabit}}>
+        <HabitContext.Provider value={{state, dispatch, getAllHabits, addUserHabit, deleteHabit}}>
             {children}
         </HabitContext.Provider>
     )
