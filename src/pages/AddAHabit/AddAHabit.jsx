@@ -17,8 +17,10 @@ import { AuthContext } from "../../context/auth-context";
 
 export const AddAHabit = () => {
   const [userInput, setUserInput] = useState("");
-  const [clickedMoreId, setClickedMoreId] = useState("")
-  const { state, getAllHabits, addUserHabit, deleteHabit } =
+  const [userEditInput, setUserEditInput] = useState("")
+  const [clickedMoreId, setClickedMoreId] = useState("");
+  const [clickedEditId, setClickedEditId] = useState("");
+  const { state, getAllHabits, addUserHabit, deleteHabit, editHabit } =
     useContext(HabitContext);
   const { authToken } = useContext(AuthContext);
 
@@ -26,7 +28,7 @@ export const AddAHabit = () => {
     if (authToken) {
       getAllHabits({ encodedToken: authToken });
     }
-  }, []);
+  }, [userEditInput]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -36,6 +38,13 @@ export const AddAHabit = () => {
     }
   };
 
+  const editSubmitHandler = (e)=>{
+    e.preventDefault()
+    editHabit({encodedToken:authToken, habitId: clickedEditId, habitData: userEditInput})
+    setClickedEditId("")
+    setUserEditInput("")
+
+  }
 
   return (
     <Flex h="100%" w="100%">
@@ -72,29 +81,79 @@ export const AddAHabit = () => {
               cursor="pointer"
               justifyContent="space-between"
               alignItems="center"
-            >
+            >{
+              clickedEditId === ele._id && 
+              <form onSubmit={editSubmitHandler}>
+                <Flex>
+                <textarea className="text-area" value={userEditInput} onChange={(e)=>setUserEditInput(e.target.value)}/>
+                <Button type="submit" backgroundColor="primaryColor">
+                OK
+              </Button>
+                </Flex>
+              </form>
+            }
+            {
+              clickedEditId !== ele._id && 
               <Text>{ele.habit}</Text>
+            }
+              
               <Flex gap="0.1rem" position="relative">
                 <IconButton
-                  onClick={()=>setClickedMoreId(ele._id)}
+                  onClick={() => setClickedMoreId(ele._id)}
                   icon={<FiMoreVertical />}
                 ></IconButton>
-                {clickedMoreId === ele._id &&<Box
-                  pos="absolute"
-                  backgroundColor="white"
-                  p="0.5rem"
-                  border="1px"
-                  borderColor="grey"
-                >
-                  <Box
-                  onClick={() =>{
-                    deleteHabit({ encodedToken: authToken, habitId: ele._id })
-                    setClickedMoreId("")
-                  }
-                    
-                  }
-                  >Delete</Box>
-                </Box>}
+                {clickedMoreId === ele._id && (
+                  <Flex
+                    pos="absolute"
+                    backgroundColor="white"
+                    border="1px"
+                    borderColor="grey"
+                    zIndex="99"
+                  >
+                    <Box>
+                      <Box
+                        onClick={()=>{
+                          deleteHabit({encodedToken:authToken, habitId:ele._id})
+                        }}
+                        padding="0.2rem"
+                        fontSize="sm"
+                        _hover={{ backgroundColor: "gray.100" }}
+                      >
+                        Delete
+                      </Box>
+                      <Box borderTop="1px" borderColor="grey"></Box>
+                      <Box
+                        padding="0.2rem"
+                        fontSize="sm"
+                        _hover={{ backgroundColor: "gray.100" }}
+                        onClick={()=>{
+                          setClickedEditId(ele._id)
+                          setUserEditInput(ele.habit)
+                          setClickedMoreId("")
+                        }}
+                      >
+                        Edit
+                      </Box>
+                      <Box borderTop="1px" borderColor="grey"></Box>
+                      <Box
+                        padding="0.2rem"
+                        fontSize="sm"
+                        _hover={{ backgroundColor: "gray.100" }}
+                      >
+                        Archive
+                      </Box>
+                      <Box borderTop="1px" borderColor="grey"></Box>
+                      <Box
+                        padding="0.2rem"
+                        fontSize="sm"
+                        _hover={{ backgroundColor: "gray.100" }}
+                        onClick={()=>setClickedMoreId("")}
+                      >
+                        Cancel
+                      </Box>
+                    </Box>
+                  </Flex>
+                )}
               </Flex>
             </Flex>
           ))}

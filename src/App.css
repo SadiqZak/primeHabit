@@ -1,3 +1,10 @@
 .link-tag{
     width: 100%;
 }
+
+.text-area{
+    resize: none;
+    height: max-content;
+    border: 1px solid grey;
+    border-radius: 5px;
+}

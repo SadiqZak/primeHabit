@@ -96,7 +96,7 @@ export const editHabitHandler = function (schema, request) {
   const { habit } = JSON.parse(request.requestBody);
   const habitId = request.params.habitId;
   const habitIndex = user.habits.findIndex((habit) => habit._id === habitId);
-  user.habits[habitIndex] = { ...user.habits[habitIndex], ...habit };
+  user.habits[habitIndex] = { ...user.habits[habitIndex], habit };
   this.db.users.update({ _id: user._id }, user);
   return new Response(200, {}, { habits: user.habits });
 };

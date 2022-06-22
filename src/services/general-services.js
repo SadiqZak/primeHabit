@@ -27,3 +27,13 @@ export const deleteHabitService = ({encodedToken, habitId})=>{
         }
     })
 }
+
+export const editHabitService = ({encodedToken, habitId, habitData})=>{
+    return axios.post(`/api/habits/${habitId}`,{
+        habit:habitData
+    },{
+        headers:{
+            authorization:encodedToken
+        }
+    })
+}
