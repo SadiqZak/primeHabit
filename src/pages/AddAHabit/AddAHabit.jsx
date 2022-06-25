@@ -8,7 +8,8 @@ import {
   IconButton,
   Box,
 } from "@chakra-ui/react";
-import { FaTrashAlt } from "react-icons/fa";
+import {toast, ToastContainer} from 'react-toastify'; //Importing toastify module
+import 'react-toastify/dist/ReactToastify.css'; //Importing toastify css file
 import { FiMoreVertical } from "react-icons/fi";
 import React, { useContext, useEffect, useState } from "react";
 import { Sidebar } from "../../Components/Sidebar";
@@ -30,16 +31,29 @@ export const AddAHabit = () => {
     }
   }, [userEditInput]);
 
+  
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (userInput.length !== 0) {
       addUserHabit({ encodedToken: authToken, habitData: userInput });
       setUserInput("");
+      toast.success('Added Habit', {
+        position: toast.POSITION.BOTTOM_RIGHT
+      })
+    }else{
+      toast.error('Please add habit', {
+        position: toast.POSITION.BOTTOM_RIGHT
+      })
     }
+
   };
 
   const editSubmitHandler = (e)=>{
     e.preventDefault()
+    toast.success('Editted successfully',{
+      position: toast.POSITION.BOTTOM_RIGHT
+    })
     editHabit({encodedToken:authToken, habitId: clickedEditId, habitData: userEditInput})
     setClickedEditId("")
     setUserEditInput("")
@@ -52,7 +66,7 @@ export const AddAHabit = () => {
       <VStack margin="0 auto" w="400px">
         <Heading>My Habit</Heading>
         <VStack w="100%">
-          {/* Submitting habit */}
+          {/* Submitting habit */}<ToastContainer/>
           <form onSubmit={submitHandler}>
             <Flex>
               <Input
@@ -114,6 +128,9 @@ export const AddAHabit = () => {
                       <Box
                         onClick={()=>{
                           deleteHabit({encodedToken:authToken, habitId:ele._id})
+                          toast.success("Deleted habit",{
+                            position: toast.POSITION.BOTTOM_RIGHT
+                          })
                         }}
                         padding="0.2rem"
                         fontSize="sm"
